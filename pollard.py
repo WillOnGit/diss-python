@@ -210,10 +210,8 @@ def add(P1,P2,N,func=False):
 
 # use trial division on input to either return a factor or confirm a number is prime
 def brute(N):
-    if N < 20:
-        return "What the fuck are you, stupid?"
     if N % 2 == 0:
-        return "Even, so obviously composite"
+        return "2 is a factor"
     for x in range(3,int(N**0.5)+1,2):
         if N % x == 0:
             return "%i is a factor" % (x)
