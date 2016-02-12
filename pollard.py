@@ -1,9 +1,5 @@
 """
-Important: this code is probably super messy, because I don't know how to perform the proper checks of input and whatnot in python. I will hopefully come clean it up in the future. But, realistically, probably not. Who knows.
-
-
-
-Implementation of pollard's (and subsequently lenstra's) algorithm for factorisation. Functions to convert a number from base 10 to binary, to perform modular exponentiation, and to apply the euclidean algorithm need to be defined first before a fourth function to implement pollard is made.
+Implementation of pollard's (and subsequently lenstra's) algorithm for factorisation. Functions to convert a number from base 10 to binary, to perform modular exponentiation, and to apply the euclidean algorithm need to be defined first before a fourth function to implement pollard is made. --- If only I had known about bin at the time. Could perhaps rewrite use the builtin, which is doubtless more efficient
 
 All code assumes curve is in short Weierstrass form, i.e. a = 0
 
@@ -24,7 +20,7 @@ Some practice numbers to test include:
     1331544304861 - probably best leave this to lenstra's..
     1689542430967
     8414786257
-    30436307070163 - ermagehrd, need to get this one somehow -- Got it!
+    30436307070163
     15871587578715223124213557 - hmm, tried with (2,1), (3,1), (3,2), (5,2)
 """
 
@@ -50,8 +46,6 @@ def binary(integer):
             representation[l-p] = 1
 
     return representation
-
-# oh god why must I do this in python
 
 # perform modular exponentiation and return a^k mod n. Depends on function binary
 def modex(a=1,k=1,n=1):

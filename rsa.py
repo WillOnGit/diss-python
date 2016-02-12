@@ -1,11 +1,9 @@
 """
 This is some code to implement basic RSA functionality, mainly for the purposes of an example breaking of encryption with Lenstra's algorithm.
 
-This code will use some functions which are defined in what is currently "pollard.py", which is currently in ~/Documents/Uni/Python/ , but I'm debating rearranging the DISS491 directory so that the .git repository includes all of the 'meta' files. This isn't really the place to be documenting this but oh well. Since I'll presumably be working on this file a bunch in the near-future, it may inspire me to actually do something.
-
 The prime 1512094127 might be a good one for modulus. Make sure it is actually prime before you go-go though. -- It is. But actually, the new website makes it redundant. This is the website: http://compoasso.free.fr/primelistweb/page/prime/liste_online_en.php
 
-1250812582321 I also found, go me.
+1250812582321 was found by random happenstance. Go figure.
 
 Lazy examples:
 p = 791648724667
@@ -25,7 +23,7 @@ def encrypt(plaintext,public_key):
 		return "Invalid plaintext: must be between one and modulus"
 	return modex(plaintext,public_key[0],public_key[1])
 
-# decryption key of form (exponent, modulus)
+# decryption key of form (exponent, modulus) - actually, separate decryption function unnecessary
 def decrypt(ciphertext, decryption_key):
 	if ciphertext<0 or ciphertext>decryption_key[1]:
 		return "Invalid ciphertext: must be between one and modulus"
@@ -56,5 +54,6 @@ def keygen(p,q):
 
 # END OF RSA STUFF
 
+# playing with xor'ing strings via chr and ord, more or less procrastination though
 def strxor(input,key):
     return [input,key]
