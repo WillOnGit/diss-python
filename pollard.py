@@ -1,32 +1,18 @@
 """
-Implementation of pollard's (and subsequently lenstra's) algorithm for factorisation. Functions to convert a number from base 10 to binary, to perform modular exponentiation, and to apply the euclidean algorithm need to be defined first before a fourth function to implement pollard is made. --- If only I had known about bin at the time. Could perhaps rewrite use the builtin, which is doubtless more efficient
+Implementation of pollard's (and subsequently lenstra's) algorithm for
+factorisation.  Functions to convert a number from base 10 to binary,
+to perform modular exponentiation, and to apply the euclidean
+algorithm need to be defined first before a fourth function to
+implement pollard is made.  --- If only I had known about bin at the
+time. Could perhaps rewrite using the builtin, which is doubtless more
+efficient.
 
 All code assumes curve is in short Weierstrass form, i.e. a = 0
-
-Some practice numbers to test include:
-    246082373
-    540143
-    491389 - might be the one that doesn't really work for Pollard
-    6994241
-    5917
-    779167
-    4331 - throws error when A=5, investigate
-    10001
-    18923
-    115147
-    455839
-    45471277 / 3319403221
-    152148213 - ?
-    1331544304861 - probably best leave this to lenstra's..
-    1689542430967
-    8414786257
-    30436307070163
-    15871587578715223124213557 - hmm, tried with (2,1), (3,1), (3,2), (5,2)
 """
 
 import math
 
-# return the binary representation of an integer, in reverse order as an array
+# return the binary representation of an integer
 def binary(integer):
     # compare input with increasing powers of two to generate list
     compare = 2
@@ -47,7 +33,7 @@ def binary(integer):
 
     return representation
 
-# perform modular exponentiation and return a^k mod n. Depends on function binary
+# perform modular exponentiation and return a^k mod n
 def modex(a=1,k=1,n=1):
     bin = binary(k)
 
@@ -141,7 +127,8 @@ def euclidean(a,b,prin=True,inv=False):
         else:
             print "GCD = %i = %i * %i - %i * %i" % (b, X, B, Y, A)
 
-    if inv:# return inverse of smaller input in Z_(larger input). Not necessarily valid!
+    # return inverse of b in Z_a. Not necessarily valid!
+    if inv:
         if length <= 2:
             return (b,(-1*Y)%A)
 
@@ -155,7 +142,9 @@ def euclidean(a,b,prin=True,inv=False):
         return b
 
 # double input point P modulo N, on C: Y2 = X3 + bX + c (mod N)
-# when called within function, returns [success,value], so either [all fine, point] or [couldn't double point, this is the offending inverse]
+#
+# when called within function, returns [success,value]
+# so either [all fine, point] or [error, offending inverse]
 def dub(P,N,b=1,func=False):
     # first calculate lambda, = lamb
     e = euclidean((2*P[1])%N,N,prin=False,inv=True)
@@ -178,7 +167,8 @@ def dub(P,N,b=1,func=False):
     return (x,y)
 
 # adds two distinct points modulo N, on EC : Y2 = X3 + bX + c
-# when called within function, returns [success,value], so either [all fine, point] or [couldn't double point, this is the offending inverse]
+# when called within function, returns [success,value]
+# so either [all fine, point] or [error, offending inverse]
 def add(P1,P2,N,func=False):
     #calculate lambda, = lamb
     e = euclidean((P2[0]-P1[0])%N,N,prin=False,inv=True)
@@ -202,7 +192,7 @@ def add(P1,P2,N,func=False):
 
 # MAIN FUNCTIONS
 
-# use trial division on input to either return a factor or confirm a number is prime
+# use trial division on input to return a factor or "prime"
 def brute(N):
     if N % 2 == 0:
         return "2 is a factor"
