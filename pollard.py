@@ -1,11 +1,9 @@
 """
-Implementation of pollard's (and subsequently lenstra's) algorithm for
-factorisation.  Functions to convert a number from base 10 to binary,
-to perform modular exponentiation, and to apply the euclidean
-algorithm need to be defined first before a fourth function to
-implement pollard is made.  --- If only I had known about bin at the
-time. Could perhaps rewrite using the builtin, which is doubtless more
-efficient.
+Implementation of lenstra's algorithm for factorisation.  Functions to convert
+a number from base 10 to binary, to perform modular exponentiation, and to
+apply the euclidean algorithm need to be defined first before a fourth function
+to implement lenstra is made. Could perhaps rewrite using the builtin, which is
+doubtless more efficient.
 
 All code assumes curve is in short Weierstrass form, i.e. a = 0
 """
@@ -190,8 +188,6 @@ def add(P1,P2,N,func=False):
         return [0,(x,y)]
     return(x,y)
 
-# MAIN FUNCTIONS
-
 # use trial division on input to return a factor or "prime"
 def brute(N):
     if N % 2 == 0:
@@ -201,15 +197,7 @@ def brute(N):
             return "%i is a factor" % (x)
     return "Prime"
 
-# perform pollard's algorithm on an input
-def pollard(N,K=10):
-    a = 2
-    for exp in range(2,K):
-        a = modex(a,exp,N)
-        g = euclidean(a-1,N,prin=False)
-        if g>1:
-            return "Found %i as a factor." % g
-    return "Unable to find a factor."
+# MAIN FUNCTION
 
 # perform lenstra's algorithm on an input
 def lenstra(N,K=20,b=False,X=2,Y=1):
