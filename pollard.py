@@ -1,9 +1,8 @@
 """
-Implementation of lenstra's algorithm for factorisation.  Functions to convert
-a number from base 10 to binary, to perform modular exponentiation, and to
-apply the euclidean algorithm need to be defined first before a fourth function
-to implement lenstra is made. Could perhaps rewrite using the builtin, which is
-doubtless more efficient.
+Implementation of lenstra's algorithm for factorisation in Python. Functions to
+convert a number from base 10 to binary, to perform modular exponentiation, and
+to apply the euclidean algorithm need to be defined first before a fourth
+function to implement lenstra is made.
 
 All code assumes curve is in short Weierstrass form, i.e. a = 0
 """
